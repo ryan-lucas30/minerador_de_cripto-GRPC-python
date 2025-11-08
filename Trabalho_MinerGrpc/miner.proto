@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+service Miner {
+    rpc getTransactionID (Empty) returns (TransactionIDResponse) {}
+    rpc getChallenge (TransactionIDRequest) returns (ChallengeResponse) {}
+    rpc getTransactionStatus (TransactionIDRequest) returns (StatusResponse) {}
+    rpc submitChallenge (SolutionRequest) returns (SubmitResponse) {}
+    rpc getWinner (TransactionIDRequest) returns (WinnerResponse) {}
+    rpc getSolution (TransactionIDRequest) returns (SolutionInfoResponse) {}
+}
+
+message Empty {}
+
+message TransactionIDRequest {
+    int32 transactionID = 1;
+}
+
+message TransactionIDResponse {
+    int32 transactionID = 1;
+}
+
+message ChallengeResponse {
+    int32 challenge = 1;
+}
+
+message StatusResponse {
+    int32 status = 1;
+}
+
+message SolutionRequest {
+    int32 transactionID = 1;
+    int32 clientID = 2;
+    string solution = 3;
+}
+
+message SubmitResponse {
+    int32 result = 1;
+}
+
+message WinnerResponse {
+    int32 winnerID = 1;
+}
+
+message SolutionInfoResponse {
+    int32 status = 1;
+    string solution = 2;
+    int32 challenge = 3;
+}
